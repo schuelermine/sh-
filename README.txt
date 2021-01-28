@@ -42,8 +42,29 @@ that make up the statement the substitution is used in.
 
     chown (id -un) /opt/sh-
 
-A substitution must be a single token.
+A substitution must not be less than a single token.
 Unlike many shells, you cannot use this to do string interpolation, to prefix
 arguments, or expand cartesian products.
 
-    
+You can split a substitution into multiple tokens by
+suffixing the closing parenwith:
+
+- A dollar sign ($) to split along newlines
+- A hash sign (#) to split along whitespace
+- An asterisk (*) to split into characters
+- A series of positive integers (seperated by whitespace) enclosed in braces ({}),
+  which will split at these indices. You may use another substitution in here.
+
+3: BUILTIN COMMANDS
+===================
+
+Since these features aren't very expansive, sh- includes a large number of builtin commands.
+These commands always take precedence over ones found in the $PATH.
+If a sh- program is used in a non-shell-scripting context, these are the only commands available.
+
+ _______________________________________________
+/\                                              \
+\_| This section of the spec isn't complete yet |
+  |                                             |
+  |   __________________________________________|_
+   \_/____________________________________________/
