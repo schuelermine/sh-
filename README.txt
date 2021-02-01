@@ -63,22 +63,22 @@ A substitution is split into multiple tokens, which is controlled by suffixing t
 - A series of regular expressions (seperated by whitespace) enclosed in angle brackets (<>).
   This works analogous to the braces.
 
-    ++ -s + (echo Hello\
+    ++ -s + -- (echo Hello\
     World,\ how\ are\ you?).
 
-    ++ -s + (echo Hello\
+    ++ -s + -- (echo Hello\
     World,\ how\ are\ you?)$
 
-    ++ -s (\\n) (echo Hello\
+    ++ -s (\\n) -- (echo Hello\
     World,\ how\ are\ you?)#
 
-    ++ -s (\\n) (echo Hello\
+    ++ -s (\\n) -- (echo Hello\
     World,\ how\ are\ you?)*
 
-    ++ -s (\\n) (echo Hello\
+    ++ -s (\\n) -- (echo Hello\
     World,\ how\ are\ you?)[1 3]
 
-    ++ -s (\\n) (echo Hello\
+    ++ -s (\\n) -- (echo Hello\
     World,\ how\ are\ you?){r e}
 
   Note: ++ and \n are builtin commands
