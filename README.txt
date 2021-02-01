@@ -7,10 +7,11 @@ NOTE: This language isn't recommended for professional or regular use.
 
 The sh- language is a reduced version of shell scripting, inspired by the fish shell.
 As you might notice, the name (sh-) alludes to this by being minus, i.e. less, of sh (shell).
-Unfortunately, this design goal may not have been achieved completely.
+Unfortunately, this design goal may not have been achieved completely.[0]
 It's called a language because there's no REPL to go along with it[1], and its syntax could
 be repurposed as a more general language.
 
+[0] Some might say, not at all.
 [1] For that matter, there's no interpreter to go along with it either - for now.
 
 This document's examples will use a generic Linux distribution with standard GNU software.
