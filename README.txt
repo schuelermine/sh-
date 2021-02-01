@@ -84,8 +84,16 @@ A substitution is split into multiple tokens, which is controlled by suffixing t
 
 You can read the output of this in the ./EXAMPLES/SPLAT.txt file.
 
-You can further prefix all of these options except angle brackets and brackets and the asterisk and period with a solidus (/).
-This will, instead of splitting the string, escape the 
+You can further prefix the braces, hash sign, asterisk and dollar the with a solidus (/).
+This will, instead of splitting the string, escape the relevant characters with a backslash, and escape the backslash itself.
+
+    echo (echo A\ B\\)/[\ ]
+  returns
+    A\ B\\
+
+    echo (echo A+B\\)/[+]
+  returns
+    A\+B\\
 
 3: SCRIPT BLOCKS
 ================
