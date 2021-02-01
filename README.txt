@@ -49,30 +49,43 @@ A substitution must not be less than a single token.
 Unlike many shells, you cannot use this to do string interpolation, to prefix
 arguments, or expand cartesian products.
 
-You can split a substitution into multiple tokens by
-suffixing the closing paren with:
+A substitution is split into multiple tokens, which is controlled by suffixing the closing paren with:
 
-- A dollar sign ($) to split along newlines
-- A hash sign (#) to split along whitespace
-- An asterisk (*) to split into characters
+- A period (.) to not split at all.
+- A dollar sign ($) to split along newlines.
+- A hash sign (#) to split along whitespace.
+- An asterisk (*) to split into characters.
 - A series of positive integers (seperated by whitespace) enclosed in brackets ([]),
   which will split at these indices. You may use another substitution in here.
 - A series of strings (seperated by whitespace) enclosed in braces ({}),
   which will split at any occurence of these strings. You may use another substitution in here.
+- A series of regular expressions (seperated by whitespace) enclosed in angle brackets (<>).
+  This works analogous to the braces.
 
-    concat --seperator (newline) (echo Hello\
+    ++ -s + (echo Hello\
+    World,\ how\ are\ you?).
+
+    ++ -s + (echo Hello\
     World,\ how\ are\ you?)$
-    concat --seperator (newline) (echo Hello\
+
+    ++ -s (\\n) (echo Hello\
     World,\ how\ are\ you?)#
-    concat --seperator (newline) (echo Hello\
+
+    ++ -s (\\n) (echo Hello\
     World,\ how\ are\ you?)*
-    concat --seperator (newline) (echo Hello\
+
+    ++ -s (\\n) (echo Hello\
     World,\ how\ are\ you?)[1 3]
-    concat --seperator (newline) (echo Hello\
+
+    ++ -s (\\n) (echo Hello\
     World,\ how\ are\ you?){r e}
-  Note: Concat and newline are builtin commands
+
+  Note: ++ and \n are builtin commands
 
 You can read the output of this in the ./EXAMPLES/SPLAT.txt file.
+
+You can further prefix all of these options except angle brackets and brackets and the asterisk and period with a solidus (/).
+This will, instead of splitting the string, escape the 
 
 3: SCRIPT BLOCKS
 ================
@@ -92,8 +105,28 @@ should not happen immediately, but after the script block is passed again. This 
 but requires invoking a builtin. To achieve this, one exclamation sign is removed from a cascade
 before passing it.
 
+Using this syntax escapes special characters in the substitutions.
+
 Please note that script blocks are not a seperate data type, they are strings, like everything.
 This is also why propagation of cascades can't happen automatically.
+
+For example:
+
+    echo {echo a}
+  returns
+    echo a
+
+    echo {echo a(}
+  fails
+
+    echo {(echo echo\ echo)#!}
+  returns
+    echo echo
+
+    echo {(echo echo\ echo).!}
+  returns
+    echo\ echo
+  Note: "echo echo" is not a real command (probably)
 
 4: BUILTIN COMMANDS
 ===================
