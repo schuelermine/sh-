@@ -1,10 +1,13 @@
 Introduction to the sh- language
 
+NOTE: This language isn't recommended for professional or regular use.
+
 0: INTRO
 ========
 
 The sh- language is a reduced version of shell scripting, inspired by the fish shell.
 As you might notice, the name (sh-) alludes to this by being minus, i.e. less, of sh (shell).
+Unfortunately, this design goal may not have been achieved completely.
 It's called a language because there's no REPL to go along with it[1], and its syntax could
 be repurposed as a more general language.
 
@@ -36,9 +39,9 @@ This is done by prefixing it with a backslash. In sh-, the backslash is only use
 2: SUBSTITUTION
 ===============
 
-Inside the list of tokens, you may use a pair of parentheses to open a substitution.
-A substitution is simply another script. The output of this script is then used in the list of tokens
-that make up the statement the substitution is used in.
+Inside the list of tokens, you may use a pair of parentheses (()) to open a substitution.
+A substitution's content is simply another script. The output of this script is then
+used in the list of tokens that make up the statement the substitution is used in.
 
     chown (id -un) /opt/sh-
 
@@ -47,24 +50,55 @@ Unlike many shells, you cannot use this to do string interpolation, to prefix
 arguments, or expand cartesian products.
 
 You can split a substitution into multiple tokens by
-suffixing the closing parenwith:
+suffixing the closing paren with:
 
 - A dollar sign ($) to split along newlines
 - A hash sign (#) to split along whitespace
 - An asterisk (*) to split into characters
-- A series of positive integers (seperated by whitespace) enclosed in braces ({}),
+- A series of positive integers (seperated by whitespace) enclosed in brackets ([]),
   which will split at these indices. You may use another substitution in here.
+- A series of strings (seperated by whitespace) enclosed in braces ({}),
+  which will split at any occurence of these strings. You may use another substitution in here.
 
-3: BUILTIN COMMANDS
+    concat --seperator (newline) (echo Hello\
+    World,\ how\ are\ you?)$
+    concat --seperator (newline) (echo Hello\
+    World,\ how\ are\ you?)#
+    concat --seperator (newline) (echo Hello\
+    World,\ how\ are\ you?)*
+    concat --seperator (newline) (echo Hello\
+    World,\ how\ are\ you?)[1 3]
+    concat --seperator (newline) (echo Hello\
+    World,\ how\ are\ you?){r}
+  Note: Concat and newline are builtin commands
+
+3: SCRIPT BLOCKS
+================
+
+Sh- also offers a feature very similar to substitutions, called script blocks.
+Script blocks are surrounded by braces ({}).
+Instead of executing the command and substituting the value,
+script blocks represent their contents, exactly.
+However, a program will still fail to compile/parse/validate if a script block's contents aren't valid.
+As such, script blocks mainly allow for encapsulation.
+
+Inside a script block, command substitutions may be suffixed
+(after the previously mentioned suffixes) with an exclamation point (!).
+This will expand the substitution before the text of the script block is passed to the command.
+Inside a nested script block, you may use double or more exclamation marks (a "cascade") to denote that this
+should not happen immediately, but after the script block is passed again. This doesn't happen automatically,
+but requires invoking a builtin. To achieve this, one exclamation sign is removed from a cascade
+before passing it.
+
+Please note that script blocks are not a seperate data type, they are strings, like everything.
+This is also why propagation of cascades can't happen automatically.
+
+4: BUILTIN COMMANDS
 ===================
 
 Since these features aren't very expansive, sh- includes a large number of builtin commands.
 These commands always take precedence over ones found in the $PATH.
 If a sh- program is used in a non-shell-scripting context, these are the only commands available.
 
- _______________________________________________
-/\                                              \
-\_| This section of the spec isn't complete yet |
-  |                                             |
-  |   __________________________________________|_
-   \_/____________________________________________/
+See the dedicated builtins documentation for more info.
+Note that this info hasn't been written yet.
