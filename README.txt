@@ -69,8 +69,10 @@ suffixing the closing paren with:
     concat --seperator (newline) (echo Hello\
     World,\ how\ are\ you?)[1 3]
     concat --seperator (newline) (echo Hello\
-    World,\ how\ are\ you?){r}
+    World,\ how\ are\ you?){r e}
   Note: Concat and newline are builtin commands
+
+You can read the output of this in the ./EXAMPLES/SPLAT.txt file.
 
 3: SCRIPT BLOCKS
 ================

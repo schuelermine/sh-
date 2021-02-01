@@ -1,0 +1,42 @@
+Hello
+World, how are you?
+Hello
+World,
+how
+are
+you?
+H
+e
+l
+l
+o
+
+
+W
+o
+r
+l
+d
+,
+ 
+h
+o
+w
+ 
+a
+r
+e
+ 
+y
+o
+u
+?
+H
+el
+lo
+World, how are you?
+H
+llo
+Wo
+ld, how a
+you?
