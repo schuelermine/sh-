@@ -41,10 +41,11 @@ This is done by prefixing it with a backslash. In sh-, the backslash is only use
 ===============
 
 Inside the list of tokens, you may use a pair of parentheses (()) to open a substitution.
+It is usually succeeded by a period (.) or dollar sign ($). More about this later.
 A substitution's content is simply another script. The output of this script is then
 used in the list of tokens that make up the statement the substitution is used in.
 
-    chown (id -un) /opt/sh-
+    chown (id -un). /opt/sh-
 
 A substitution must not be less than a single token.
 Unlike many shells, you cannot use this to do string interpolation, to prefix
