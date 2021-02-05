@@ -144,7 +144,3 @@ If a `sh-` program is used in a non-shell-scripting context, these are the only 
 
 See the dedicated builtins documentation for more info.  
 Note that this info hasn't been written yet.
-
-## 5: Invocation, parsing & implementation
-### This section is *work in progress*. It may not accurately reflect the implementation.
-
