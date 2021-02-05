@@ -1,4 +1,4 @@
-# Introduction to the `sh-` language
+# The `sh-` language
 
 NOTE: This language isn't recommended for professional or regular use.
 
