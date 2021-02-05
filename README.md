@@ -61,11 +61,11 @@ A substitution is split into multiple tokens, which is controlled by suffixing t
 - A dollar sign (`$`) to split along newlines.  
 - A hash sign (`#`) to split along whitespace.  
 - An asterisk (`*`) to split into characters.  
-- A series of positive integers (seperated by whitespace) enclosed in brackets ([]),
+- A series of positive integers (seperated by whitespace) enclosed in brackets (`[]`),
   which will split at these indices. You may use another substitution in here.  
-- A series of strings (seperated by whitespace) enclosed in braces ({}),
+- A series of strings (seperated by whitespace) enclosed in braces (`{}`),
   which will split at any occurence of these strings. You may use another substitution in here.  
-- A series of regular expressions (seperated by whitespace) enclosed in angle brackets (<>).
+- A series of regular expressions (seperated by whitespace) enclosed in angle brackets (`<>`).
   This works analogous to the braces.
 
 ```  
@@ -102,7 +102,7 @@ Additionally, you can suffix the substitution with an exclamation mark. This has
 ## 3: SCRIPT BLOCKS
 
 `sh-` also offers a feature very similar to substitutions, called script blocks.  
-Script blocks are surrounded by braces ({}).  
+Script blocks are surrounded by braces (`{}`).  
 Instead of executing the command and substituting the value,  
 script blocks represent their contents, exactly.  
 However, a program will still fail to compile/parse/validate if a script block's contents aren't valid.  
