@@ -13,7 +13,7 @@ be repurposed as a more general language.
 [^0] Some might say, not at all.  
 [^1] For that matter, there's no interpreter to go along with it either - for now.
 
-**In this document, we will use lines delimited on both ends by hash signs to denote comments. This is not a feature of the language.**  
+**In this document, example code will be prefixed by a dollar sign (`$`). This is not a feature of the language. It serves to distinguish them from comments relating to that code that are also inside the codeblocks, which are prefixed with a hash sign (`#`). The sign used does not indicate permissions held by the program.**  
 This document's examples will use a generic Linux distribution with standard GNU software.
 
 ## 1: BASIC SYNTAX
@@ -28,16 +28,16 @@ When running as a shell script, a statement may be executed by invoking a corres
 executable in the $PATH with the passed parameters being the arguments.
 
 ```  
-echo Hello  
-mv --help  
-ls /  
+$ echo Hello  
+$ mv --help  
+$ ls /  
 ```
 
 If one wishes to include whitespace in a token, the whitespace needs to be escaped.  
 This is done by prefixing it with a backslash. In `sh-`, the backslash is only used to escape reserved characters.
 
 ```  
-echo Hello\ World  
+$ echo Hello\ World  
 ```
 
 ## 2: SUBSTITUTION
@@ -48,7 +48,7 @@ A substitution's content is simply another script. The output of this script is 
 used in the list of tokens that make up the statement the substitution is used in.
 
 ```  
-chown (id -un). /opt/sh-  
+$ chown (id -un). /opt/sh-  
 ```
 
 A substitution must not be less than a single token.  
@@ -69,28 +69,28 @@ A substitution is split into multiple tokens, which is controlled by suffixing t
   This works analogous to the braces.
 
 ```  
-++ -s + -- (echo Hello\  
+$ ++ -s + -- (echo Hello\  
 World,\ how\ are\ you?).  
 ```  
 ```  
-++ -s + -- (echo Hello\  
-World,\ how\ are\ you?)$  
+$ ++ -s + -- (echo Hello\  
+$ World,\ how\ are\ you?)$  
 ```  
 ```  
-++ -s (\\n) -- (echo Hello\  
-World,\ how\ are\ you?)#  
+$ ++ -s (\\n) -- (echo Hello\  
+$ World,\ how\ are\ you?)#  
 ```  
 ```  
-++ -s (\\n) -- (echo Hello\  
-World,\ how\ are\ you?)*  
+$ ++ -s (\\n) -- (echo Hello\  
+$ World,\ how\ are\ you?)*  
 ```  
 ```  
-++ -s (\\n) -- (echo Hello\  
-World,\ how\ are\ you?)[1 3]  
+$ ++ -s (\\n) -- (echo Hello\  
+$ World,\ how\ are\ you?)[1 3]  
 ```  
 ```  
-++ -s (\\n) -- (echo Hello\  
-World,\ how\ are\ you?){r e}  
+$ ++ -s (\\n) -- (echo Hello\  
+$ World,\ how\ are\ you?){r e}  
 ```
 
 *Note:* `++` *and* `\n` *are builtin commands*
@@ -113,26 +113,26 @@ Please note that script blocks are not a seperate data type, they are strings, l
 For example:
 
 ```  
-echo {echo a}  
-##returns##  
-echo a  
+$ echo {echo a}  
+# returns  
+$ echo a  
 ```
 
 ```  
-echo {echo a(}  
-##fails##  
+$ echo {echo a(}  
+# fails  
 ```
 
 ```  
-echo {(echo echo\ echo)#!}  
-##returns##  
-echo echo  
+$ echo {(echo echo\ echo)#!}  
+# returns  
+$ echo echo  
 ```
 
 ```  
-echo {(echo echo\ echo).!}  
-##returns##  
-echo\ echo  
+$ echo {(echo echo\ echo).!}  
+# returns  
+$ echo\ echo  
 ```  
 *Note: "echo echo" is not a real command (probably)*
 
@@ -145,4 +145,6 @@ If a `sh-` program is used in a non-shell-scripting context, these are the only 
 See the dedicated builtins documentation for more info.  
 Note that this info hasn't been written yet.
 
-## 5: Invocation
+## 5: Invocation, parsing & implementation
+### This section is *work in progress*. It may not accurately reflect the implementation.
+
